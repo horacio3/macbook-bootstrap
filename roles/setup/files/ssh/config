@@ -1,0 +1,22 @@
+Host cbast
+  Hostname cbast.dfw1.corp.rackspace.net
+  # Hostname cbast.ord1.corp.rackspace.net
+  # Hostname cbast.iad3.corp.rackspace.net
+  User hora4617
+  ForwardAgent yes
+  ControlPath none
+Host pbast
+  Hostname pbast.ord1.corp.rackspace.net
+  # Hostname pbast.iad3.corp.rackspace.net
+  User hora4617
+  ForwardAgent yes
+  ControlPath none
+  StrictHostKeyChecking no
+Host !pbast !cbast *
+  ProxyCommand ssh -p 22 pbast nc %h %p
+  ServerAliveInterval 300
+  ControlMaster auto
+  ControlPath ~/.ssh/sock/%C
+  ControlPersist 10h
+  ForwardAgent yes
+  StrictHostKeyChecking no
